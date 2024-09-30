@@ -40,6 +40,8 @@
             justify-content: center;
             width: 100%;
             max-width: 1200px;
+            padding: 20px 0; /* Добавлено для симметрии */
+            box-sizing: border-box;
         }
 
         .carousel-items {
@@ -112,11 +114,19 @@
             .carousel-item {
                 width: 150px;
             }
+
+            .carousel-items {
+                gap: 15px; /* Уменьшено расстояние для мобильных устройств */
+            }
         }
 
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.5em;
+            }
+
+            .carousel {
+                padding: 10px 0; /* Добавлено для симметрии */
             }
 
             .carousel-item {
