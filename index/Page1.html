@@ -110,6 +110,24 @@
             }
         }
 
+        /* Стиль кнопки "Добавить в корзину" */
+        .add-to-cart-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #45a049;
+        }
+
         /* Стиль корзины */
         .cart-icon {
             position: fixed;
@@ -132,6 +150,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            z-index: 102; /* Поверх остальных элементов */
         }
 
         .modal-content {
@@ -235,7 +254,7 @@
                     • Размеры: 2,35 * 107<br>
                     • Размеры спального места: 190 * 150
                 </div>
-                <button onclick="addToCart('Диван “UR01”')">Добавить в корзину</button>
+                <button class="add-to-cart-button" onclick="addToCart('Диван “UR01”')">Добавить в корзину</button>
             </div>
         </div>
 
