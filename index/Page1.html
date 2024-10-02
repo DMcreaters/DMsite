@@ -103,13 +103,6 @@
             animation: fadeInAnimation 1s forwards;
         }
 
-        @keyframes fadeInAnimation {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Стиль кнопки "Добавить в корзину" */
         .add-to-cart-button {
             margin-top: 10px;
@@ -138,7 +131,7 @@
             padding: 10px;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 301;
+            z-index: 101;
         }
 
         /* Модальное окно корзины */
@@ -150,7 +143,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 303; /* Повышаем z-index, чтобы быть поверх всех элементов */
+            z-index: 103; /* Повышаем z-index, чтобы быть поверх всех элементов */
         }
 
         .modal-content {
@@ -159,7 +152,7 @@
             padding: 20px;
             width: 80%;
             max-width: 500px;
-            z-index: 304; /* Устанавливаем z-index для контента модального окна */
+            z-index: 104; /* Устанавливаем z-index для контента модального окна */
         }
 
         .close {
@@ -206,6 +199,23 @@
         .modal-content button:hover {
             background-color: #5d4037;
         }
+
+        /* Стиль для страницы заказов */
+        .orders-section {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .order {
+            background-color: #e1f5fe;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .order h3 {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -234,7 +244,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeCheckout()">&times;</span>
             <h2>Оформление заказа</h2>
-            <form>
+            <form onsubmit="submitOrder(event)">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" required>
                 <label for="phone">Телефон:</label>
@@ -259,33 +269,42 @@
             </div>
         </div>
 
-        <!-- Добавь другие товары аналогично... -->
+        <!-- Другие товары добавляйте аналогично... -->
+
     </div>
 
+    <h2 class="orders-section">Заказы:</h2>
+    <div id="orders-container"></div>
+
     <script>
-        let cart = [];
+        let cart = {};
+        let orders = [];
 
         function addToCart(itemName) {
-            cart.push(itemName);
-            document.getElementById('cart-count').innerText = cart.length;
-            alert(itemName + ' добавлен в корзину');
+            if (cart[itemName]) {
+                cart[itemName]++;
+            } else {
+                cart[itemName] = 1;
+            }
+            document.getElementById('cart-count').innerText = Object.values(cart).reduce((a, b) => a + b, 0);
+            alert(itemName + ' добавлен в корзину!');
         }
 
         function openCart() {
-            const cartModal = document.getElementById('cart-modal');
-            const cartItems = document.getElementById('cart-items');
-            cartItems.innerHTML = '';
-            cart.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerText = item;
-                cartItems.appendChild(itemDiv);
-            });
-            cartModal.style.display = 'block';
+            document.getElementById('cart-modal').style.display = 'block';
+            updateCartDisplay();
         }
 
         function closeCart() {
             document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            for (const item in cart) {
+                cartItemsContainer.innerHTML += `<div class="cart-item">${item}: ${cart[item]}</div>`;
+            }
         }
 
         function openCheckout() {
@@ -295,6 +314,44 @@
 
         function closeCheckout() {
             document.getElementById('checkout-form').style.display = 'none';
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const orderDetails = {
+                name,
+                phone,
+                email,
+                items: { ...cart }
+            };
+            orders.push(orderDetails);
+            displayOrders();
+            closeCheckout();
+            resetCart();
+        }
+
+        function resetCart() {
+            cart = {};
+            document.getElementById('cart-count').innerText = '0';
+        }
+
+        function displayOrders() {
+            const ordersContainer = document.getElementById('orders-container');
+            ordersContainer.innerHTML = '';
+            for (const order of orders) {
+                ordersContainer.innerHTML += `
+                    <div class="order">
+                        <h3>Заказ от ${order.name} (${order.phone}, ${order.email})</h3>
+                        <p>Товары:</p>
+                        <ul>
+                            ${Object.entries(order.items).map(([item, quantity]) => `<li>${item}: ${quantity}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
         }
     </script>
 
