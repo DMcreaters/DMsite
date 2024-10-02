@@ -150,7 +150,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 102; /* Поверх остальных элементов */
+            z-index: 103; /* Повышаем z-index, чтобы быть поверх всех элементов */
         }
 
         .modal-content {
@@ -159,6 +159,7 @@
             padding: 20px;
             width: 80%;
             max-width: 500px;
+            z-index: 104; /* Устанавливаем z-index для контента модального окна */
         }
 
         .close {
