@@ -57,7 +57,7 @@
 
         .text-section {
             padding: 10px;
-            flex: 0 0 60px;
+            flex: 0 0 60px; /* Уменьшена высота текстовой секции */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -70,6 +70,15 @@
             margin: 5px 0;
             text-align: center;
         }
+		.long-container {
+		width: 80%;
+		padding:40px;
+		background-color: #fff8e1;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+		border-radius: 10px;
+		margin: 20px 0;
+			}
+
 
         .description {
             font-size: 12px;
@@ -103,118 +112,11 @@
             animation: fadeInAnimation 1s forwards;
         }
 
-        /* Стиль кнопки "Добавить в корзину" */
-        .add-to-cart-button {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        .add-to-cart-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Стиль корзины */
-        .cart-icon {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #3e2723;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 101;
-        }
-
-        /* Модальное окно корзины */
-        .modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 103; /* Повышаем z-index, чтобы быть поверх всех элементов */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 500px;
-            z-index: 104; /* Устанавливаем z-index для контента модального окна */
-        }
-
-        .close {
-            color: red;
-            font-size: 28px;
-            float: right;
-            cursor: pointer;
-        }
-
-        .modal-content h2 {
-            margin-top: 0;
-        }
-
-        .cart-item {
-            margin-bottom: 10px;
-        }
-
-        /* Стиль формы заказа */
-        .modal-content form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-content form label {
-            margin: 10px 0 5px;
-        }
-
-        .modal-content form input {
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .modal-content button {
-            padding: 10px;
-            background-color: #3e2723;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .modal-content button:hover {
-            background-color: #5d4037;
-        }
-
-        /* Стиль для страницы заказов */
-        .orders-section {
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .order {
-            background-color: #e1f5fe;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .order h3 {
-            margin: 0;
+        @keyframes fadeInAnimation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -223,137 +125,230 @@
     <button class="back-button" onclick="history.back()">Назад</button>
 
     <h1>Мебельный Магазин</h1>
-
-    <!-- Кнопка корзины -->
-    <div class="cart-icon" onclick="openCart()">
-        🛒 <span id="cart-count">0</span>
-    </div>
-
-    <!-- Модальное окно корзины -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCart()">&times;</span>
-            <h2>Ваша корзина</h2>
-            <div id="cart-items"></div>
-            <button onclick="openCheckout()">Оформить заказ</button>
-        </div>
-    </div>
-
-    <!-- Модальное окно оформления заказа -->
-    <div id="checkout-form" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCheckout()">&times;</span>
-            <h2>Оформление заказа</h2>
-            <form onsubmit="submitOrder(event)">
-                <label for="name">Имя:</label>
-                <input type="text" id="name" required>
-                <label for="phone">Телефон:</label>
-                <input type="tel" id="phone" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>
-                <button type="submit">Отправить заказ</button>
-            </form>
-        </div>
-    </div>
-
+    
     <div class="container-wrapper">
         <div class="container fade-in">
             <img class="image-preview" src="d/Divan1.jpg" alt="Софа 1">
             <div class="text-section">
-                <div class="short-label">Диван “UR01”</div>
+                <div class="short-label">Диван “UR01” </div>
                 <div class="description">
-                    • Размеры: 2,35 * 107<br>
-                    • Размеры спального места: 190 * 150
+					• Размеры:2,35 *107
+					• Размеры спального места: 190*150
                 </div>
-                <button class="add-to-cart-button" onclick="addToCart('Диван “UR01”')">Добавить в корзину</button>
             </div>
         </div>
 
-        <!-- Другие товары добавляйте аналогично... -->
+        <div class="container fade-in" style="animation-delay: 0.2s;">
+            <img class="image-preview" src="d/Divan2.jpg" alt="Прямой Диван «Модерн»">
+            <div class="text-section">
+                <div class="short-label">Прямой Диван «Модерн»</div>
+                <div class="description">
+Размер 2,5
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
 
+        <div class="container fade-in" style="animation-delay: 0.4s;">
+            <img class="image-preview" src="d/Divan3.jpg" alt="Стол 3">
+            <div class="text-section">
+                <div class="short-label">Угловой диван «Равена»
+</div>
+                <div class="description">Размер 3,20*1,80</div>
+            </div>
+        </div>
+
+        <div class="container fade-in" style="animation-delay: 0.6s;">
+            <img class="image-preview" src="d/Error1.jpg" alt="Шкаф 4">
+            <div class="text-section">
+                <div class="short-label">Диван “Тифани “</div>
+                <div class="description">2,5*1,0
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
     </div>
+	 <div class="container-wrapper">
+        <div class="container fade-in">
+            <img class="image-preview" src="d/Divan5.jpg" alt="Софа 1">
+            <div class="text-section">
+                <div class="short-label">Диван "Клоуд" 
+</div>
+                <div class="description">Размер 2,6*1,1
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
 
-    <h2 class="orders-section">Заказы:</h2>
-    <div id="orders-container"></div>
+        <div class="container fade-in" style="animation-delay: 0.2s;">
+            <img class="image-preview" src="d/Divan6.jpg" alt="Кресло 2">
+            <div class="text-section">
+                <div class="short-label">Диван "Чикаго" 
+</div>
+                <div class="description">Размер 2,5*1,1</div>
+            </div>
+        </div>
 
-    <script>
-        let cart = {};
-        let orders = [];
+        <div class="container fade-in" style="animation-delay: 0.4s;">
+            <img class="image-preview" src="d/Divan7.jpg" alt="Стол 3">
+            <div class="text-section">
+                <div class="short-label">Модульный диван "Boston"</div>
+                <div class="description">размер 3м</div>
+            </div>
+        </div>
 
-        function addToCart(itemName) {
-            if (cart[itemName]) {
-                cart[itemName]++;
-            } else {
-                cart[itemName] = 1;
-            }
-            document.getElementById('cart-count').innerText = Object.values(cart).reduce((a, b) => a + b, 0);
-            alert(itemName + ' добавлен в корзину!');
-        }
+        <div class="container fade-in" style="animation-delay: 0.6s;">
+            <img class="image-preview" src="d/Divan13.jpg" alt="Шкаф 4">
+            <div class="text-section">
+                <div class="short-label">Диван «Пума»
+</div>
+                <div class="description">Размер 2,50*1,1
+Спальное место :2,00*1,50
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
+    </div> <div class="container-wrapper">
+        <div class="container fade-in">
+            <img class="image-preview" src="d/Divan9.jpg" alt="Софа 1">
+            <div class="text-section">
+                <div class="short-label">Угловой диван Джерси</div>
+                <div class="description">2,8*1,80</div>
+            </div>
+        </div>
 
-        function openCart() {
-            document.getElementById('cart-modal').style.display = 'block';
-            updateCartDisplay();
-        }
+        <div class="container fade-in" style="animation-delay: 0.2s;">
+            <img class="image-preview" src="d/Divan10.jpg" alt="Кресло 2">
+            <div class="text-section">
+                <div class="short-label">Угловой диван «Модерн»
+</div>
+                <div class="description">Размер :2,80*1,80 
+Механизм раскладывания : дельфин</div>
+            </div>
+        </div>
 
-        function closeCart() {
-            document.getElementById('cart-modal').style.display = 'none';
-        }
+        <div class="container fade-in" style="animation-delay: 0.4s;">
+            <img class="image-preview" src="d/Divan11.jpg" alt="Стол 3">
+            <div class="text-section">
+                <div class="short-label">Угловой Диван «Брауни»
+</div>
+                <div class="description">Размер :2,80*1,70
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
 
-        function updateCartDisplay() {
-            const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = '';
-            for (const item in cart) {
-                cartItemsContainer.innerHTML += `<div class="cart-item">${item}: ${cart[item]}</div>`;
-            }
-        }
+        <div class="container fade-in" style="animation-delay: 0.6s;">
+            <img class="image-preview" src="d/Divan12.jpg" alt="Шкаф 4">
+            <div class="text-section">
+                <div class="short-label">Угловой модерн 
+</div>
+                <div class="description">* Размеры:2,75*1,80
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
+    </div>
+	<div class="container-wrapper">
+        <div class="container fade-in">
+            <img class="image-preview" src="d/Divan13.jpg" alt="Софа 1">
+            <div class="text-section">
+                <div class="short-label">Диван «Пума»
+</div>
+                <div class="description">Размер 2,50*1,1
+Спальное место :2,00*1,50
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+</div>
+            </div>
+        </div>
 
-        function openCheckout() {
-            closeCart();
-            document.getElementById('checkout-form').style.display = 'block';
-        }
+        <div class="container fade-in" style="animation-delay: 0.2s;">
+            <img class="image-preview" src="d/Divan14.jpg" alt="Кресло 2">
+            <div class="text-section">
+                <div class="short-label">Диван «Лоди »</div>
+                <div class="description">Современное кресло для любого интерьера.</div>
+            </div>
+        </div>
 
-        function closeCheckout() {
-            document.getElementById('checkout-form').style.display = 'none';
-        }
+        <div class="container fade-in" style="animation-delay: 0.4s;">
+            <img class="image-preview" src="d/Divan15.jpg" alt="Стол 3">
+            <div class="text-section">
+                <div class="short-label">Диван «UR-03»</div>
+                <div class="description">Размер 3,20
+ Каркас: натуральное дерево сосны
+Брус 5×5 . 
+На болтовом крепеже .
+🧽 Наполнение сиденья: БНП (блок независимых пружин ) Poket Spring (256 пружин на кв.м), термо войлок ,эргофлекс,  ХС-наполнитель (ЛАТЕКС +МЕМОРИ).Механизм расклада Тик-Так</div>
+            </div>
+        </div>
 
-        function submitOrder(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const orderDetails = {
-                name,
-                phone,
-                email,
-                items: { ...cart }
-            };
-            orders.push(orderDetails);
-            displayOrders();
-            closeCheckout();
-            resetCart();
-        }
+        <div class="container fade-in" style="animation-delay: 0.6s;">
+            <img class="image-preview" src="d/Divan16.jpg" alt="Шкаф 4">
+            <div class="text-section">
+                <div class="short-label">Стильный шкаф</div>
+                <div class="description">Элегантный шкаф для хранения вещей.</div>
+            </div>
+        </div>
+    </div>
+	<div class="container-wrapper">
+        <div class="container fade-in">
+            <img class="image-preview" src="d/Divan17.jpg" alt="Софа 1">
+            <div class="text-section">
+                <div class="short-label">Роскошная софа</div>
+                <div class="description">Удобная и стильная софа для вашего дома.</div>
+            </div>
+        </div>
 
-        function resetCart() {
-            cart = {};
-            document.getElementById('cart-count').innerText = '0';
-        }
+        <div class="container fade-in" style="animation-delay: 0.2s;">
+            <img class="image-preview" src="d/Divan18.jpg" alt="Кресло 2">
+            <div class="text-section">
+                <div class="short-label">Диван «Belt»</div>
+                <div class="description">Современное кресло для любого интерьера.</div>
+            </div>
+        </div>
 
-        function displayOrders() {
-            const ordersContainer = document.getElementById('orders-container');
-            ordersContainer.innerHTML = '';
-            for (const order of orders) {
-                ordersContainer.innerHTML += `
-                    <div class="order">
-                        <h3>Заказ от ${order.name} (${order.phone}, ${order.email})</h3>
-                        <p>Товары:</p>
-                        <ul>
-                            ${Object.entries(order.items).map(([item, quantity]) => `<li>${item}: ${quantity}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-        }
-    </script>
+        <div class="container fade-in" style="animation-delay: 0.4s;">
+            <img class="image-preview" src="d/Divan19.jpg" alt="Стол 3">
+            <div class="text-section">
+                <div class="short-label">Кресло «Классик»</div>
+                <div class="description">Идеальный стол для семейных ужинов.</div>
+            </div>
+        </div>
+
+        <div class="container fade-in" style="animation-delay: 0.6s;">
+            <img class="image-preview" src="d/Divan20.jpg" alt="Шкаф 4">
+            <div class="text-section">
+                <div class="short-label">Стильный шкаф</div>
+                <div class="description">Элегантный шкаф для хранения вещей.</div>
+            </div>
+        </div>
+    </div>
+	<div class="container-wrapper">
+    <div class="container fade-in long-container">
+        <img class="image-preview" src="d/Section.jpg" alt="Длинная секция">
+        <div class="text-section">
+            <div class="short-label">Наши товары сделаны</div>
+            <div class="description">
+                Мы предлагаем широкий ассортимент мебели, включая диваны, кресла, столы и шкафы. Наша продукция отличается высоким качеством и стильным дизайном. Свяжитесь с нами для получения дополнительной информации.
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
